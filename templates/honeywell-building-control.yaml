@@ -4,11 +4,13 @@ info:
   name: Honeywell Building Control
   author: dhiyaneshDK
   severity: info
-  tags: panel,iot
+  description: Honeywell Building control panel was detected.
   metadata:
-    shodan-query: 'html:"Honeywell Building Control"'
+    max-request: 1
+    shodan-query: html:"Honeywell Building Control"
+  tags: panel,iot
 
-requests:
+http:
   - method: GET
     path:
       - "{{BaseURL}}"
@@ -22,3 +24,4 @@ requests:
       - type: status
         status:
           - 200
+# digest: 4a0a00473045022100a83eac085f1d018323994ca14922711cde37cd4d7f1a5c36a7e2fae8813cfa49022028a03cc74e28741faa1e9761f3540241c58eb11189cb9d2f5fc5743ac187416c:922c64590222798bb761d5b6d8e72950

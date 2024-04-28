@@ -1,11 +1,13 @@
 id: CVE-2021-38647
 
 info:
-  name: OMIGOD - Open Management Infrastructure RCE
+  name: Microsoft Open Management Infrastructure - Remote Code Execution
   author: daffainfo,xstp
   severity: critical
-  tags: cve,cve2021,rce,omi,microsoft
-  description: Open Management Infrastructure Remote Code Execution Vulnerability
+  description: Microsoft Open Management Infrastructure is susceptible to remote code execution (OMIGOD).
+  impact: |
+    Successful exploitation of this vulnerability could allow an attacker to execute arbitrary code with SYSTEM privileges.
+  remediation: Updates for this vulnerability were published on GitHub on August 11, 2021.
   reference:
     - https://www.wiz.io/blog/omigod-critical-vulnerabilities-in-omi-azure
     - https://msrc.microsoft.com/update-guide/vulnerability/CVE-2021-38647
@@ -14,10 +16,19 @@ info:
     - https://github.com/microsoft/omi
   classification:
     cvss-metrics: CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H
-    cvss-score: 9.80
+    cvss-score: 9.8
     cve-id: CVE-2021-38647
+    cwe-id: CWE-287
+    epss-score: 0.97408
+    epss-percentile: 0.99918
+    cpe: cpe:2.3:a:microsoft:azure_automation_state_configuration:-:*:*:*:*:*:*:*
+  metadata:
+    max-request: 1
+    vendor: microsoft
+    product: azure_automation_state_configuration
+  tags: cve2021,cve,rce,omi,microsoft,kev
 
-requests:
+http:
   - raw:
       - |
         POST /wsman HTTP/1.1
@@ -66,3 +77,4 @@ requests:
           - '<p:StdOut>'
           - 'uid=0(root) gid=0(root) groups=0'
         condition: and
+# digest: 4a0a0047304502206af18db77891961bb08ab842031ca9857e34aeb1ecac121d6e3a2658d0def036022100f3712fcda08491956c1e412cd46636040d1853b3d659d0f1ac3dc1319f8a3456:922c64590222798bb761d5b6d8e72950

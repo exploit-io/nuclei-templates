@@ -1,17 +1,25 @@
 id: projectsend-login
 
 info:
-  name: ProjectSend login panel
+  name: ProjectSend Login Panel - Detect
   author: idealphase
   severity: info
+  description: ProjectSend login panel was detected.
   reference:
     - https://www.exploit-db.com/ghdb/7380
     - https://github.com/projectsend/projectsend
+  classification:
+    cvss-metrics: CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:N
+    cwe-id: CWE-200
+    cpe: cpe:2.3:a:projectsend:projectsend:*:*:*:*:*:*:*:*
   metadata:
-    google-dork: intext:Provided by ProjectSend
-  tags: panel,projectsend
+    google-query: intext:Provided by ProjectSend
+    max-request: 1
+    product: projectsend
+    vendor: projectsend
+  tags: panel,projectsend,edb
 
-requests:
+http:
   - method: GET
     path:
       - '{{BaseURL}}'
@@ -38,3 +46,4 @@ requests:
         group: 1
         regex:
           - "version (.*) - Free software"
+# digest: 490a0046304402205508b14f68e874ea90a98be2df51c6ff2f41da7e34a1aa4238eed76a7c35f74102206be87397007a41eca21e2cebae06172dae4654c0484557725c35770f8bdbd38a:922c64590222798bb761d5b6d8e72950
